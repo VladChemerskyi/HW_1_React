@@ -1,0 +1,27 @@
+.course-card {
+	border: 2px solid;
+	border-color: #37b95e;
+	margin: 20px 0;
+	padding: 10px;
+	display: flex;
+}
+
+.left-part {
+	min-width: 70%;
+	max-width: 70%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 20px;
+}
+
+.right-part {
+	max-width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 20px;
+}
+
+.card-description {
+	font-size: 17px;
+}

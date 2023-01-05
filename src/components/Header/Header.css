@@ -1,0 +1,18 @@
+header {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+	border: 2px solid;
+	border-color: #eb92b5;
+	align-items: center;
+	height: 120px;
+}
+
+.log-in {
+	display: flex;
+}
+
+.nick-name {
+	padding: 0 20px;
+	margin: 0;
+}

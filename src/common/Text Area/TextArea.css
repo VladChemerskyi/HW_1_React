@@ -1,0 +1,10 @@
+.text-area__block {
+	display: flex;
+	flex-direction: column;
+}
+
+.text-area {
+	border: 2px solid;
+	border-color: #e2f81a;
+	padding: 5px 10px;
+}

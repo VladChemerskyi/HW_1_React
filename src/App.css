@@ -1,0 +1,11 @@
+.main-page {
+  border: 2px solid;
+  border-color: #5d97be;
+  margin: 10px 0;
+  padding: 20px;
+}
+
+.main-page__header {
+  display: flex;
+  justify-content: space-between;
+}
