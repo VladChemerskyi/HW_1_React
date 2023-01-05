@@ -30,6 +30,7 @@ function App() {
 						}}
 					/>
 				)}
+
 				{selectedPage === pages.createCourse && (
 					<CreateCourse
 						authors={authors}
