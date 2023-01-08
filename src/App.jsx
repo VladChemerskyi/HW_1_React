@@ -4,7 +4,7 @@ import './App.css';
 import { Header, Courses, CreateCourse } from './components';
 import { mockedAuthorsList, mockedCoursesList, pages } from './constants.js';
 
-function App() {
+const App = () => {
 	const [authors, setAuthors] = useState(mockedAuthorsList);
 	const [courses, setCourses] = useState(mockedCoursesList);
 	const [selectedPage, setSelectedPage] = useState(pages.courses);
@@ -38,6 +38,6 @@ function App() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default App;

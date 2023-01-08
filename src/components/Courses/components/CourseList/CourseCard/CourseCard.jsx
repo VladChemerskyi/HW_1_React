@@ -1,7 +1,7 @@
-import { Button } from '../../../../common';
+import { Button } from '../../../../../common';
 import './CourseCard.css';
 
-function CourseCard(props) {
+const CourseCard = (props) => {
 	const { title, description, authors, duration, creationDate } = props;
 
 	return (
@@ -26,6 +26,6 @@ function CourseCard(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export { CourseCard };

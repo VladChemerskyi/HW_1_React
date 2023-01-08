@@ -1,6 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { dateGenerator } from './helpers';
 
+const MIN_AUTHORS_NAME_LENGHT = 2;
+const MIN_COURSE_AUTHORS_SELECTED = 0;
+
 const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
@@ -95,4 +98,11 @@ const initialCourse = {
 	authors: [],
 };
 
-export { mockedCoursesList, mockedAuthorsList, pages, initialCourse };
+export {
+	mockedCoursesList,
+	mockedAuthorsList,
+	pages,
+	initialCourse,
+	MIN_AUTHORS_NAME_LENGHT,
+	MIN_COURSE_AUTHORS_SELECTED,
+};

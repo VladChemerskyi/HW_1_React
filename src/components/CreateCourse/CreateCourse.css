@@ -34,33 +34,18 @@ input {
 	min-height: 320px;
 }
 
-.one {
+.authors__container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 20px;
 }
 
-.two {
+.course-authors__container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 20px;
-}
-
-.duration {
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-}
-
-.duration p {
-	font-size: 25px;
-}
-
-
-.duration .inputs input {
-	width: 80%;
 }
 
 .authors-title {
@@ -83,7 +68,24 @@ input {
 	margin: 0;
 }
 
-.check {
+.duration {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.duration p {
+	font-size: 25px;
+}
+
+
+.duration .inputs input {
+	width: 80%;
+}
+
+
+
+.form__container {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;

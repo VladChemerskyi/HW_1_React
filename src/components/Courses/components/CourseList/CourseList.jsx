@@ -1,5 +1,5 @@
 import { pipeDuration } from '../../../../helpers';
-import { CourseCard } from '../';
+import { CourseCard } from './CourseCard';
 
 const CoursesList = (props) => {
 	const { courses, search, authors } = props;

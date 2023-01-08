@@ -4,29 +4,38 @@ import './CreateCourse.css';
 
 import { Button, Input, TextArea } from '../../common';
 import { pipeDuration } from '../../helpers';
-import { initialCourse } from '../../constants';
+import {
+	initialCourse,
+	MIN_AUTHORS_NAME_LENGHT,
+	MIN_COURSE_AUTHORS_SELECTED,
+} from '../../constants';
 
 const CreateCourse = (props) => {
 	const { authors, onCreateCourseClick, onAuthorCreate } = props;
+
 	const [newAuthor, setNewAuthor] = useState('');
 	const [course, setCourse] = useState(initialCourse);
 
+	const resetCourse = () => {
+		setCourse(initialCourse);
+	};
 	const courseCreateHandler = () => {
-		if (
+		const isCourseValid =
 			course.title &&
 			course.description &&
 			course.duration &&
-			course.authors.length > 0
-		) {
+			course.authors.length > MIN_COURSE_AUTHORS_SELECTED;
+
+		if (isCourseValid) {
 			onCreateCourseClick(course);
-			setCourse(initialCourse);
+			resetCourse();
 		} else {
 			alert('Please, fill in all fields');
 		}
 	};
 
 	const authorCreateHandler = () => {
-		if (newAuthor.length > 2) {
+		if (newAuthor.length > MIN_AUTHORS_NAME_LENGHT) {
 			onAuthorCreate({ id: uuidv4(), name: newAuthor });
 			setNewAuthor('');
 		} else {
@@ -37,7 +46,7 @@ const CreateCourse = (props) => {
 	return (
 		<div>
 			<div>
-				<div className='check'>
+				<div className='form__container'>
 					<div>
 						<Input
 							label='Title'
@@ -64,7 +73,7 @@ const CreateCourse = (props) => {
 				</div>
 			</div>
 			<div className='authors-section'>
-				<div className='one'>
+				<div className='authors__container'>
 					<div className='create-author'>
 						<h2>Add author:</h2>
 						<Input
@@ -79,18 +88,18 @@ const CreateCourse = (props) => {
 					<div className='all-authors'>
 						<h2 className='authors-title'>Authors</h2>
 						{authors
-							.filter((el) => !course.authors.includes(el.id))
-							.map((el) => {
+							.filter((author) => !course.authors.includes(author.id))
+							.map((author) => {
 								return (
-									<li className='authors-list' key={el.id}>
+									<li className='authors-list' key={author.id}>
 										<div>
-											<p>{el.name}</p>
+											<p>{author.name}</p>
 											<Button
 												text='Add author'
 												onClick={() =>
 													setCourse({
 														...course,
-														authors: [...course.authors, el.id],
+														authors: [...course.authors, author.id],
 													})
 												}
 											/>
@@ -101,7 +110,7 @@ const CreateCourse = (props) => {
 					</div>
 				</div>
 
-				<div className='two'>
+				<div className='course-authors__container'>
 					<div className='duration'>
 						<Input
 							label='Duration'
@@ -119,11 +128,11 @@ const CreateCourse = (props) => {
 					<div className='course-authors'>
 						<h2 className='authors-title'>Course authors</h2>
 
-						{course.authors.length === 0 ? (
+						{course.authors.length === MIN_COURSE_AUTHORS_SELECTED ? (
 							<h3 className='authors-title'>Author list is empty</h3>
 						) : (
-							course.authors.map((el) => {
-								let auth = authors.find((author) => author.id === el);
+							course.authors.map((courseAuthor) => {
+								let auth = authors.find((author) => author.id === courseAuthor);
 								return (
 									<li className='authors-list' key={auth.id}>
 										<div>
