@@ -28,11 +28,7 @@ input {
 	width: 80%;
 }
 
-.authors {
-	width: 50%;
-	min-height: 320px;
-}
-
+.all-authors,
 .course-authors {
 	width: 50%;
 	min-height: 320px;

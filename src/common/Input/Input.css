@@ -1,11 +1,11 @@
-.input__block {
+.input__container {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
 }
 
-.input__block .input {
+.input__container .input {
 	border: 2px solid;
 	border-color: #f1dd23;
 	padding: 5px 10px;

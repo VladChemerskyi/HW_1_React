@@ -1,18 +1,16 @@
 import './Header.css';
 
-import { Logo } from './components/Logo/Logo.jsx';
-import { Button } from '../../common/Button/Button.jsx';
+import { Logo } from './Logo/Logo.jsx';
+import { Button } from '../../common';
 
-function Header({ onLogoClick }) {
+export const Header = ({ onLogoClick }) => {
 	return (
 		<header>
-			<Logo logoClick={onLogoClick} />
+			<Logo onLogoClick={onLogoClick} />
 			<div className='log-in'>
-				<p className='nick-name'>Vlad</p>
+				<p className='nickname'>Vlad</p>
 				<Button text='Logout' />
 			</div>
 		</header>
 	);
-}
-
-export default Header;
+};

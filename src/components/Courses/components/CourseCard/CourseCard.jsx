@@ -1,4 +1,4 @@
-import { Button } from '../../../../common/Button/Button.jsx';
+import { Button } from '../../../../common';
 import './CourseCard.css';
 
 function CourseCard(props) {
@@ -6,19 +6,19 @@ function CourseCard(props) {
 
 	return (
 		<div className='course-card'>
-			<div className='left-part'>
-				<h2 className='card-title'>{title}</h2>
-				<p className='card-description'>{description}</p>
+			<div className='course-card__description'>
+				<h2>{title}</h2>
+				<p>{description}</p>
 			</div>
-			<div className='right-part'>
-				<div className='card-course-info'>
-					<p className='card-authors'>
+			<div className='course-card__info'>
+				<div>
+					<p>
 						<b>Authors: </b> {authors}
 					</p>
-					<p className='card-duration'>
+					<p>
 						<b>Duration: </b> {duration}
 					</p>
-					<p className='card-creation-date'>
+					<p>
 						<b>Created: </b> {creationDate}
 					</p>
 				</div>
@@ -28,4 +28,4 @@ function CourseCard(props) {
 	);
 }
 
-export default CourseCard;
+export { CourseCard };

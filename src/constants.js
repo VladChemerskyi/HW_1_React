@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
+import { dateGenerator } from './helpers';
+
 const mockedCoursesList = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
@@ -78,4 +81,18 @@ const mockedAuthorsList = [
 	},
 ];
 
-export { mockedCoursesList, mockedAuthorsList };
+const pages = {
+	courses: 'Courses',
+	createCourse: 'CreateCourse',
+};
+
+const initialCourse = {
+	id: uuidv4(),
+	title: '',
+	description: ``,
+	creationDate: dateGenerator(),
+	duration: '',
+	authors: [],
+};
+
+export { mockedCoursesList, mockedAuthorsList, pages, initialCourse };

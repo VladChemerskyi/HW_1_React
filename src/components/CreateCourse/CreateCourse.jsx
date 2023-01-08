@@ -2,29 +2,16 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './CreateCourse.css';
 
-import { TextArea } from '../../common/Text Area/TextArea.jsx';
-import { Input } from '../../common/Input/Input.jsx';
-import { Button } from '../../common/Button/Button.jsx';
+import { Button, Input, TextArea } from '../../common';
+import { pipeDuration } from '../../helpers';
+import { initialCourse } from '../../constants';
 
-import { getDate } from '../../helpers/dateGenerator.js';
-import parseDuration from '../../helpers/pipeDuration.js';
-
-const courseTemplate = {
-	id: uuidv4(),
-	title: '',
-	description: ``,
-	creationDate: getDate(),
-	duration: 0,
-	authors: [],
-};
-
-function CreateCourse(props) {
+const CreateCourse = (props) => {
 	const { authors, onCreateCourseClick, onAuthorCreate } = props;
 	const [newAuthor, setNewAuthor] = useState('');
-	const [duration, setDuration] = useState('');
-	const [course, setCourse] = useState(courseTemplate);
+	const [course, setCourse] = useState(initialCourse);
 
-	const createCourseHandler = () => {
+	const courseCreateHandler = () => {
 		if (
 			course.title &&
 			course.description &&
@@ -32,13 +19,13 @@ function CreateCourse(props) {
 			course.authors.length > 0
 		) {
 			onCreateCourseClick(course);
-			setCourse(courseTemplate);
+			setCourse(initialCourse);
 		} else {
 			alert('Please, fill in all fields');
 		}
 	};
 
-	const createAuthorHandler = () => {
+	const authorCreateHandler = () => {
 		if (newAuthor.length > 2) {
 			onAuthorCreate({ id: uuidv4(), name: newAuthor });
 			setNewAuthor('');
@@ -48,10 +35,10 @@ function CreateCourse(props) {
 	};
 
 	return (
-		<div className='create-course'>
-			<div className='upper-section'>
+		<div>
+			<div>
 				<div className='check'>
-					<div className='input-title'>
+					<div>
 						<Input
 							label='Title'
 							value={course.title}
@@ -61,8 +48,8 @@ function CreateCourse(props) {
 							placeHolderText='Enter title...'
 						/>
 					</div>
-					<div className='create-course__button'>
-						<Button text='Create course' onClick={createCourseHandler} />
+					<div>
+						<Button text='Create course' onClick={courseCreateHandler} />
 					</div>
 				</div>
 				<div className='description'>
@@ -87,9 +74,9 @@ function CreateCourse(props) {
 							placeHolderText='Enter author name...'
 							onChange={(e) => setNewAuthor(e.target.value)}
 						/>
-						<Button text='Create author' onClick={createAuthorHandler} />
+						<Button text='Create author' onClick={authorCreateHandler} />
 					</div>
-					<div className='authors'>
+					<div className='all-authors'>
 						<h2 className='authors-title'>Authors</h2>
 						{authors
 							.filter((el) => !course.authors.includes(el.id))
@@ -122,12 +109,11 @@ function CreateCourse(props) {
 							placeHolderText='Enter duration in minutes'
 							onChange={(e) => {
 								setCourse({ ...course, duration: e.target.value });
-								setDuration(e.target.value);
 							}}
-							value={duration}
+							value={course.duration}
 						/>
 						<p>
-							Duration: <b>{parseDuration(duration)}</b> hours
+							Duration: <b>{pipeDuration(course.duration)}</b> hours
 						</p>
 					</div>
 					<div className='course-authors'>
@@ -163,6 +149,6 @@ function CreateCourse(props) {
 			</div>
 		</div>
 	);
-}
+};
 
-export default CreateCourse;
+export { CreateCourse };

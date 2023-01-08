@@ -1,4 +1,4 @@
-export const getDate = () => {
+export const dateGenerator = () => {
 	let dateObj = new Date();
 
 	return (

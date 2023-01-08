@@ -1,7 +1,10 @@
 import './Button.css';
 
-export const Button = ({ text, onClick }) => (
-	<button className='button' onClick={onClick}>
-		{text}
-	</button>
-);
+export const Button = (props) => {
+	const { text, onClick } = props;
+	return (
+		<button className='button' onClick={onClick}>
+			{text}
+		</button>
+	);
+};

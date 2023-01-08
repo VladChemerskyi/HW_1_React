@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 
-import Header from './components/Header/Header.jsx';
-import Courses from './components/Courses/Courses.jsx';
-import CreateCourse from './components/CreateCourse/CreateCourse.jsx';
-
-import { mockedAuthorsList, mockedCoursesList } from './constants.js';
-
-const pages = {
-	courses: 'Courses',
-	createCourse: 'CreateCourse',
-};
+import { Header, Courses, CreateCourse } from './components';
+import { mockedAuthorsList, mockedCoursesList, pages } from './constants.js';
 
 function App() {
 	const [authors, setAuthors] = useState(mockedAuthorsList);
