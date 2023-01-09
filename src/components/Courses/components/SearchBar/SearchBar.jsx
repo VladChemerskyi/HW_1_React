@@ -3,7 +3,14 @@ import './SearchBar.css';
 import { Button, Input } from '../../../../common';
 
 export const SearchBar = (props) => {
-	const { search, setSearch } = props;
+	const { search, onSearchChange } = props;
+
+	const onClearClick = () => {
+		onSearchChange('');
+	};
+	const onSearchHandler = (input) => {
+		onSearchChange(input.target.value);
+	};
 
 	return (
 		<div className='search-bar'>
@@ -11,17 +18,10 @@ export const SearchBar = (props) => {
 				placeHolderText='Enter course name...'
 				type='text'
 				size='50'
-				onChange={(input) => {
-					setSearch(input.target.value);
-				}}
+				onChange={onSearchHandler}
 				value={search}
 			/>
-			<Button
-				text='Clear'
-				onClick={() => {
-					setSearch('');
-				}}
-			/>
+			<Button text='Clear' onClick={onClearClick} />
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
 import './Header.css';
 
-import { Logo } from './Logo/Logo.jsx';
+import { Logo } from './Logo';
 import { Button } from '../../common';
 
 export const Header = (props) => {

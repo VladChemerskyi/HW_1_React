@@ -4,7 +4,7 @@ import { dateGenerator } from './helpers';
 const MIN_AUTHORS_NAME_LENGHT = 2;
 const MIN_COURSE_AUTHORS_SELECTED = 0;
 
-const mockedCoursesList = [
+const MOCKED_COURSES_LIST = [
 	{
 		id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
 		title: 'JavaScript',
@@ -57,7 +57,7 @@ specimen book.`,
 		],
 	},
 ];
-const mockedAuthorsList = [
+const MOCKED_AUTHORS_LIST = [
 	{
 		id: '27cc3006-e93a-4748-8ca8-73d06aa93b6d',
 		name: 'Vasiliy Dobkin',
@@ -84,12 +84,12 @@ const mockedAuthorsList = [
 	},
 ];
 
-const pages = {
+const PAGES = {
 	courses: 'Courses',
 	createCourse: 'CreateCourse',
 };
 
-const initialCourse = {
+const INITIAL_COURSE = {
 	id: uuidv4(),
 	title: '',
 	description: ``,
@@ -99,10 +99,10 @@ const initialCourse = {
 };
 
 export {
-	mockedCoursesList,
-	mockedAuthorsList,
-	pages,
-	initialCourse,
+	MOCKED_COURSES_LIST,
+	MOCKED_AUTHORS_LIST,
+	PAGES,
+	INITIAL_COURSE,
 	MIN_AUTHORS_NAME_LENGHT,
 	MIN_COURSE_AUTHORS_SELECTED,
 };

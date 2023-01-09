@@ -2,13 +2,9 @@ import { pipeDuration } from '../../../../helpers';
 import { CourseCard } from './CourseCard';
 
 const CoursesList = (props) => {
-	const { courses, search, authors } = props;
+	const { courses, authors } = props;
 
-	const filteredCourses = courses.filter((course) =>
-		course.title.toLowerCase().includes(search.toLowerCase())
-	);
-
-	return filteredCourses.map((course) => {
+	return courses.map((course) => {
 		const { title, description, creationDate, duration } = course;
 
 		const parsedAuthors = course.authors
