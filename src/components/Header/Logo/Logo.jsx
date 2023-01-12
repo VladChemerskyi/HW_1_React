@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from './wb.png';
 import './Logo.css';
 

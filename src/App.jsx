@@ -1,19 +1,35 @@
 import { useState } from 'react';
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+	Link,
+	useNavigate,
+} from 'react-router-dom';
+
 import './App.css';
 
-import { Header, Courses, CreateCourse } from './components';
-import { MOCKED_AUTHORS_LIST, MOCKED_COURSES_LIST, PAGES } from './constants';
+import {
+	Header,
+	Courses,
+	CreateCourse,
+	Login,
+	CourseInfo,
+	Registration,
+} from './components';
+
+import { MOCKED_AUTHORS_LIST, MOCKED_COURSES_LIST } from './constants';
 
 const App = () => {
 	const [authors, setAuthors] = useState(MOCKED_AUTHORS_LIST);
 	const [courses, setCourses] = useState(MOCKED_COURSES_LIST);
-	const [selectedPage, setSelectedPage] = useState(PAGES.courses);
+	const navi = useNavigate();
 
-	const onLogoClickHandler = () => setSelectedPage(PAGES.courses);
-	const onNewCourseAddClickHandler = () => setSelectedPage(PAGES.createCourse);
+	const LogoClickHandler = () => navi('/');
+	const onNewCourseAddClickHandler = () => navi('/createcourse');
 	const onCourseCreateHandler = (newCourse) => {
 		setCourses((courses) => [...courses, newCourse]);
-		setSelectedPage(PAGES.courses);
+		navi('/');
 	};
 	const onAuthorCreateHandler = (author) => {
 		setAuthors((authors) => [...authors, author]);
@@ -21,23 +37,33 @@ const App = () => {
 
 	return (
 		<div>
-			<Header onLogoClick={onLogoClickHandler} />
+			<Header onLogoClick={LogoClickHandler} />
 			<div className='main-page'>
-				{selectedPage === PAGES.courses && (
-					<Courses
-						authors={authors}
-						courses={courses}
-						onNewCourseAdd={onNewCourseAddClickHandler}
+				<Routes>
+					<Route
+						path='/'
+						element={
+							<Courses
+								authors={authors}
+								courses={courses}
+								onNewCourseAdd={onNewCourseAddClickHandler}
+							/>
+						}
 					/>
-				)}
-
-				{selectedPage === PAGES.createCourse && (
-					<CreateCourse
-						authors={authors}
-						onCourseCreate={onCourseCreateHandler}
-						onAuthorCreate={onAuthorCreateHandler}
+					<Route
+						path='/createcourse'
+						element={
+							<CreateCourse
+								authors={authors}
+								onCourseCreate={onCourseCreateHandler}
+								onAuthorCreate={onAuthorCreateHandler}
+							/>
+						}
 					/>
-				)}
+					<Route path='/login' element={<Login />} />
+					<Route path='/register' element={<Registration />} />
+					<Route path='/courseinfo' element={<CourseInfo />} />{' '}
+				</Routes>
 			</div>
 		</div>
 	);

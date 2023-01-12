@@ -84,11 +84,6 @@ const MOCKED_AUTHORS_LIST = [
 	},
 ];
 
-const PAGES = {
-	courses: 'Courses',
-	createCourse: 'CreateCourse',
-};
-
 const INITIAL_COURSE = {
 	id: uuidv4(),
 	title: '',
@@ -101,7 +96,6 @@ const INITIAL_COURSE = {
 export {
 	MOCKED_COURSES_LIST,
 	MOCKED_AUTHORS_LIST,
-	PAGES,
 	INITIAL_COURSE,
 	MIN_AUTHORS_NAME_LENGHT,
 	MIN_COURSE_AUTHORS_SELECTED,
