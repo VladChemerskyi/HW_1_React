@@ -1,15 +1,13 @@
-import { pipeDuration } from '../../../../helpers';
+import { pipeDuration, findAuthorById } from '../../../../helpers';
 import { CourseCard } from './CourseCard';
 
 const CoursesList = (props) => {
 	const { courses, authors } = props;
 
 	return courses.map((course) => {
-		const { title, description, creationDate, duration } = course;
+		const { title, description, creationDate, duration, id } = course;
 
-		const parsedAuthors = course.authors
-			.map((authorID) => authors.find((author) => author.id === authorID).name)
-			.join(', ');
+		const parsedAuthors = findAuthorById(course.authors, authors);
 
 		return (
 			<div key={course.id}>
@@ -19,6 +17,7 @@ const CoursesList = (props) => {
 					creationDate={creationDate}
 					duration={pipeDuration(duration)}
 					authors={parsedAuthors}
+					id={id}
 				/>
 			</div>
 		);

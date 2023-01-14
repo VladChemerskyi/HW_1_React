@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	Link,
-	useNavigate,
-} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import './App.css';
 
@@ -23,13 +17,15 @@ import { MOCKED_AUTHORS_LIST, MOCKED_COURSES_LIST } from './constants';
 const App = () => {
 	const [authors, setAuthors] = useState(MOCKED_AUTHORS_LIST);
 	const [courses, setCourses] = useState(MOCKED_COURSES_LIST);
-	const navi = useNavigate();
+	const navigate = useNavigate();
 
-	const LogoClickHandler = () => navi('/');
-	const onNewCourseAddClickHandler = () => navi('/createcourse');
+	const LogoClickHandler = () => navigate('/courses');
+
+	const onNewCourseAddClickHandler = () => navigate('/courses/add');
+
 	const onCourseCreateHandler = (newCourse) => {
 		setCourses((courses) => [...courses, newCourse]);
-		navi('/');
+		navigate('/courses');
 	};
 	const onAuthorCreateHandler = (author) => {
 		setAuthors((authors) => [...authors, author]);
@@ -38,10 +34,11 @@ const App = () => {
 	return (
 		<div>
 			<Header onLogoClick={LogoClickHandler} />
+
 			<div className='main-page'>
 				<Routes>
 					<Route
-						path='/'
+						path='/courses'
 						element={
 							<Courses
 								authors={authors}
@@ -51,7 +48,7 @@ const App = () => {
 						}
 					/>
 					<Route
-						path='/createcourse'
+						path='/courses/add'
 						element={
 							<CreateCourse
 								authors={authors}
@@ -62,7 +59,10 @@ const App = () => {
 					/>
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Registration />} />
-					<Route path='/courseinfo' element={<CourseInfo />} />{' '}
+					<Route
+						path='/courses/:courseId'
+						element={<CourseInfo courses={courses} allAuthors={authors} />}
+					/>
 				</Routes>
 			</div>
 		</div>

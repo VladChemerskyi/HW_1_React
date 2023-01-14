@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../../../common';
 import './CourseCard.css';
 
 const CourseCard = (props) => {
-	const { title, description, authors, duration, creationDate } = props;
+	const { title, description, authors, duration, creationDate, id } = props;
+	const navigate = useNavigate();
+
+	const showDetailsClickHandle = () => navigate(`/courses/${id}`);
 
 	return (
 		<div className='course-card'>
@@ -22,7 +26,7 @@ const CourseCard = (props) => {
 						<b>Created: </b> {creationDate}
 					</p>
 				</div>
-				<Button text='Show course' />
+				<Button text='Show course' onClick={showDetailsClickHandle} />
 			</div>
 		</div>
 	);

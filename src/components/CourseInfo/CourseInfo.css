@@ -1,0 +1,22 @@
+.course {
+	border-color: blue;
+}
+
+.course__title {
+	text-align: center;
+	font-size: 40px;
+}
+
+.course__container {
+	display: flex;
+	justify-content: space-between;
+	margin: 30px;
+}
+
+.course__description {
+	width: 50%;
+}
+
+.course__info {
+	width: 30%;
+}
