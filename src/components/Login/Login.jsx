@@ -31,9 +31,10 @@ export const Login = () => {
 			},
 		});
 		const result = await response.json();
-		console.log(result);
+		const token = result.result.split(' ')[1];
 
 		if (result.successful === true) {
+			localStorage.setItem('token', token);
 			setUser(initialUser);
 			navi('/courses');
 		} else {
