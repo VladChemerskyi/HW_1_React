@@ -1,0 +1,29 @@
+.login {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.login__errors {
+	color: rgb(255, 0, 0);
+}
+
+.login__redirect {
+	color: rgb(61, 132, 238);
+}
+
+.login__input {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: 15px;
+}
+
+.login__input input {
+	border: 2px solid;
+	border-color: #e78885;
+	padding: 5px 10px;
+	margin: 10px 0;
+}

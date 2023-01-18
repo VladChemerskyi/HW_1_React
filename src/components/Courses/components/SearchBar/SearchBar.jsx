@@ -15,6 +15,7 @@ export const SearchBar = (props) => {
 	return (
 		<div className='search-bar'>
 			<Input
+				className='input__container'
 				placeHolderText='Enter course name...'
 				type='text'
 				size='50'

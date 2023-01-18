@@ -59,6 +59,7 @@ const CreateCourse = (props) => {
 				<div className='form__container'>
 					<div>
 						<Input
+							className='input__container'
 							label='Title'
 							value={course.title}
 							onChange={onTitleInputHandler}
@@ -83,6 +84,7 @@ const CreateCourse = (props) => {
 					<div className='create-author'>
 						<h2>Add author:</h2>
 						<Input
+							className='input__container'
 							label='Author name'
 							value={newAuthor}
 							type='text'
@@ -117,6 +119,7 @@ const CreateCourse = (props) => {
 				<div className='course-authors__container'>
 					<div className='duration'>
 						<Input
+							className='input__container'
 							label='Duration'
 							type='number'
 							placeHolderText='Enter duration in minutes'

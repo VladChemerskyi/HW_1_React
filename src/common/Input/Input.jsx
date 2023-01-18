@@ -1,13 +1,13 @@
 import './Input.css';
 
 export const Input = (props) => {
-	const { label, type, placeHolderText, size, onChange, value } = props;
+	const { label, type, placeHolderText, size, onChange, value, className } =
+		props;
 
 	return (
-		<div className='input__container'>
+		<div className={className}>
 			<label>{label}</label>
 			<input
-				className='input'
 				type={type}
 				placeholder={placeHolderText}
 				size={size}

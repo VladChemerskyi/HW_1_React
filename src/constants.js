@@ -92,6 +92,15 @@ const INITIAL_COURSE = {
 	duration: '',
 	authors: [],
 };
+const INITIAL_USER_LOGIN_CREDENTIALS = {
+	email: '',
+	password: '',
+};
+const INITIAL_NEW_USER_REGISTRATION_CREDENTIALS = {
+	name: '',
+	email: '',
+	password: '',
+};
 
 export {
 	MOCKED_COURSES_LIST,
@@ -99,4 +108,6 @@ export {
 	INITIAL_COURSE,
 	MIN_AUTHORS_NAME_LENGHT,
 	MIN_COURSE_AUTHORS_SELECTED,
+	INITIAL_USER_LOGIN_CREDENTIALS,
+	INITIAL_NEW_USER_REGISTRATION_CREDENTIALS,
 };

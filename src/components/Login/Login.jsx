@@ -3,67 +3,75 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { Input, Button } from '../../common/';
+import { INITIAL_USER_LOGIN_CREDENTIALS } from '../../constants';
 
-const initialUser = {
-	email: '',
-	password: '',
-};
-export const Login = () => {
-	const [user, setUser] = useState(initialUser);
+export const Login = (props) => {
+	const { onLogin } = props;
+
+	const [userCredentials, setUserCredentials] = useState(
+		INITIAL_USER_LOGIN_CREDENTIALS
+	);
 	const [message, setMessage] = useState('');
-	const navi = useNavigate();
+	const navigate = useNavigate();
 
 	const onUserEmailInputHandler = (e) => {
-		setUser({ ...user, email: e.target.value });
-		console.log(user);
+		setUserCredentials({ ...userCredentials, email: e.target.value });
+		console.log(userCredentials);
 	};
 	const onUserPasswordInputHandler = (e) => {
-		setUser({ ...user, password: e.target.value });
-		console.log(user);
+		setUserCredentials({ ...userCredentials, password: e.target.value });
+		console.log(userCredentials);
 	};
 
-	async function registrationHandler() {
+	async function loginHandler() {
 		const response = await fetch('http://localhost:3000/login', {
 			method: 'POST',
-			body: JSON.stringify(user),
+			body: JSON.stringify(userCredentials),
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		});
-		const result = await response.json();
-		const token = result.result.split(' ')[1];
 
-		if (result.successful === true) {
+		const result = await response.json();
+
+		if (result.successful) {
+			const token = result.result.split(' ')[1];
+			const userName = result.user.name;
+
 			localStorage.setItem('token', token);
-			setUser(initialUser);
-			navi('/courses');
+			setUserCredentials(INITIAL_USER_LOGIN_CREDENTIALS);
+			onLogin(userName);
+			navigate('/courses');
 		} else {
 			setMessage(result.result || result.errors);
 		}
 	}
 
 	return (
-		<div>
-			<p>{message}</p>
-
+		<div className='login'>
+			<p className='login__errors'>{message}</p>
 			<h2>Login</h2>
 			<Input
+				className='login__input'
 				label='Email'
-				value={user.email}
+				value={userCredentials.email}
 				placeHolderText='Enter email'
 				onChange={onUserEmailInputHandler}
 			/>
 			<Input
+				className='login__input'
 				label='Password'
 				type='password'
-				value={user.password}
+				value={userCredentials.password}
 				placeHolderText='Enter password'
 				onChange={onUserPasswordInputHandler}
 			/>
-			<Button text='Login' onClick={registrationHandler} />
+			<Button text='Login' onClick={loginHandler} />
 			<p>
 				If you don't have an account you can{' '}
-				<Link to='/register'>Register</Link>
+				<Link to='/register' className='login__redirect'>
+					Register
+				</Link>
 			</p>
 		</div>
 	);

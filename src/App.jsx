@@ -17,6 +17,9 @@ import { MOCKED_AUTHORS_LIST, MOCKED_COURSES_LIST } from './constants';
 const App = () => {
 	const [authors, setAuthors] = useState(MOCKED_AUTHORS_LIST);
 	const [courses, setCourses] = useState(MOCKED_COURSES_LIST);
+	const [userName, setUserName] = useState('');
+	const [isUserLogged, setIsUserLogged] = useState(false);
+
 	const navigate = useNavigate();
 
 	const LogoClickHandler = () => navigate('/courses');
@@ -30,10 +33,20 @@ const App = () => {
 	const onAuthorCreateHandler = (author) => {
 		setAuthors((authors) => [...authors, author]);
 	};
+	const onLogin = (userName) => {
+		setUserName(userName);
+		setIsUserLogged(true);
+	};
 
 	return (
 		<div>
-			<Header onLogoClick={LogoClickHandler} />
+			<Header
+				onLogoClick={LogoClickHandler}
+				userName={userName}
+				isUserLogged={isUserLogged}
+				setIsUserLogged={setIsUserLogged}
+				setUserName={setUserName}
+			/>
 
 			<div className='main-page'>
 				<Routes>
@@ -57,7 +70,7 @@ const App = () => {
 							/>
 						}
 					/>
-					<Route path='/login' element={<Login />} />
+					<Route path='/login' element={<Login onLogin={onLogin} />} />
 					<Route path='/register' element={<Registration />} />
 					<Route
 						path='/courses/:courseId'
