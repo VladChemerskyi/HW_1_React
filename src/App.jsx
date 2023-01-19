@@ -37,6 +37,11 @@ const App = () => {
 		setUserName(userName);
 		setIsUserLogged(true);
 	};
+	const onLogOutHandler = () => {
+		setIsUserLogged(false);
+		setUserName('');
+		localStorage.removeItem('token');
+	};
 
 	return (
 		<div>
@@ -44,8 +49,7 @@ const App = () => {
 				onLogoClick={LogoClickHandler}
 				userName={userName}
 				isUserLogged={isUserLogged}
-				setIsUserLogged={setIsUserLogged}
-				setUserName={setUserName}
+				onLogOutHandler={onLogOutHandler}
 			/>
 
 			<div className='main-page'>

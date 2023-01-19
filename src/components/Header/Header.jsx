@@ -5,28 +5,27 @@ import { Logo } from './Logo';
 import { Button } from '../../common';
 
 export const Header = (props) => {
-	const { userName, isUserLogged, onLogoClick, setIsUserLogged, setUserName } =
-		props;
+	const { userName, isUserLogged, onLogoClick, onLogOutHandler } = props;
 
 	const navigate = useNavigate();
 
-	const loginClickHandle = () => {
+	const authorizationClickHandle = () => {
 		if (isUserLogged) {
-			setIsUserLogged(!isUserLogged);
-			setUserName('');
-			localStorage.removeItem('token');
+			onLogOutHandler();
 		} else {
 			navigate('/login');
 		}
 	};
-	const buttonText = isUserLogged ? 'Logout' : 'Login';
 
 	return (
 		<header>
 			<Logo onLogoClick={onLogoClick} />
 			<div className='authorization'>
 				<p className='nickname'>{userName}</p>
-				<Button text={buttonText} onClick={loginClickHandle} />
+				<Button
+					text={isUserLogged ? 'Logout' : 'Login'}
+					onClick={authorizationClickHandle}
+				/>
 			</div>
 		</header>
 	);

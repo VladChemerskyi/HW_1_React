@@ -2,11 +2,11 @@ import './Registration.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input, Button } from '../../common/';
-import { INITIAL_NEW_USER_REGISTRATION_CREDENTIALS } from '../../constants';
+import { INITIAL_USER_REGISTRATION_CREDENTIALS } from '../../constants';
 
 export const Registration = () => {
 	const [newUserCredentials, setNewUserCredentials] = useState(
-		INITIAL_NEW_USER_REGISTRATION_CREDENTIALS
+		INITIAL_USER_REGISTRATION_CREDENTIALS
 	);
 	const [message, setMessage] = useState('');
 
@@ -37,10 +37,10 @@ export const Registration = () => {
 		const result = await response.json();
 
 		if (result.successful) {
-			setNewUserCredentials(INITIAL_NEW_USER_REGISTRATION_CREDENTIALS);
+			setNewUserCredentials(INITIAL_USER_REGISTRATION_CREDENTIALS);
 			navigate('/login');
 		} else {
-			setMessage(result.errors.join('; '));
+			setMessage(result.errors);
 		}
 	}
 

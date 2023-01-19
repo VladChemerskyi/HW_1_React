@@ -1,3 +1,3 @@
-export * from './Button/Button';
-export * from './Input/Input';
-export * from './Text Area/TextArea';
+export * from './Button';
+export * from './Input';
+export * from './TextArea';
