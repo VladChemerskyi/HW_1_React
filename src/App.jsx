@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import './App.css';
 
 import {
@@ -17,8 +16,6 @@ import { MOCKED_AUTHORS_LIST, MOCKED_COURSES_LIST } from './constants';
 const App = () => {
 	const [authors, setAuthors] = useState(MOCKED_AUTHORS_LIST);
 	const [courses, setCourses] = useState(MOCKED_COURSES_LIST);
-	const [userName, setUserName] = useState('');
-	const [isUserLogged, setIsUserLogged] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -33,27 +30,23 @@ const App = () => {
 	const onAuthorCreateHandler = (author) => {
 		setAuthors((authors) => [...authors, author]);
 	};
-	const onLogin = (userName) => {
-		setUserName(userName);
-		setIsUserLogged(true);
-	};
-	const onLogOutHandler = () => {
-		setIsUserLogged(false);
-		setUserName('');
-		localStorage.removeItem('token');
-	};
 
 	return (
 		<div>
-			<Header
-				onLogoClick={LogoClickHandler}
-				userName={userName}
-				isUserLogged={isUserLogged}
-				onLogOutHandler={onLogOutHandler}
-			/>
+			<Header onLogoClick={LogoClickHandler} />
 
 			<div className='main-page'>
 				<Routes>
+					<Route
+						path='/'
+						element={
+							localStorage.getItem('token') ? (
+								<Navigate to='/courses' />
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/>
 					<Route
 						path='/courses'
 						element={
@@ -74,7 +67,7 @@ const App = () => {
 							/>
 						}
 					/>
-					<Route path='/login' element={<Login onLogin={onLogin} />} />
+					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Registration />} />
 					<Route
 						path='/courses/:courseId'

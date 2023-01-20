@@ -8,7 +8,7 @@ export const Registration = () => {
 	const [newUserCredentials, setNewUserCredentials] = useState(
 		INITIAL_USER_REGISTRATION_CREDENTIALS
 	);
-	const [message, setMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export const Registration = () => {
 		console.log(newUserCredentials);
 	};
 
-	async function registrationHandler() {
+	const registrateUser = async () => {
 		const response = await fetch('http://localhost:3000/register', {
 			method: 'POST',
 			body: JSON.stringify(newUserCredentials),
@@ -34,20 +34,27 @@ export const Registration = () => {
 			},
 		});
 
-		const result = await response.json();
+		return await response.json();
+	};
+
+	const registrationHandler = async () => {
+		const result = await registrateUser();
 
 		if (result.successful) {
-			setNewUserCredentials(INITIAL_USER_REGISTRATION_CREDENTIALS);
 			navigate('/login');
 		} else {
-			setMessage(result.errors);
+			setErrorMessage(result.errors);
 		}
-	}
+	};
+
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		await registrationHandler();
+	};
 
 	return (
-		<div className='registration'>
-			<p>{message}</p>
-
+		<form className='registration' onSubmit={submitHandler}>
+			<p>{errorMessage}</p>
 			<h2>Registration</h2>
 			<Input
 				className='registration__input'
@@ -71,10 +78,10 @@ export const Registration = () => {
 				placeHolderText='Enter password'
 				onChange={onUserPasswordInputHandler}
 			/>
-			<Button text='Registration' onClick={registrationHandler} />
+			<Button text='Registration' type='submit' />
 			<p>
 				If you have an account you can <Link to='/login'>Login</Link>
 			</p>
-		</div>
+		</form>
 	);
 };

@@ -5,13 +5,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Input, Button } from '../../common/';
 import { INITIAL_USER_LOGIN_CREDENTIALS } from '../../constants';
 
-export const Login = (props) => {
-	const { onLogin } = props;
-
+export const Login = () => {
 	const [userCredentials, setUserCredentials] = useState(
 		INITIAL_USER_LOGIN_CREDENTIALS
 	);
-	const [message, setMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
 	const onUserEmailInputHandler = (e) => {
@@ -23,7 +21,7 @@ export const Login = (props) => {
 		console.log(userCredentials);
 	};
 
-	async function loginHandler() {
+	const fetchUser = async () => {
 		const response = await fetch('http://localhost:3000/login', {
 			method: 'POST',
 			body: JSON.stringify(userCredentials),
@@ -31,25 +29,31 @@ export const Login = (props) => {
 				'Content-Type': 'application/json',
 			},
 		});
+		return await response.json();
+	};
 
-		const result = await response.json();
+	async function loginHandler() {
+		const result = await fetchUser();
 
 		if (result.successful) {
 			const token = result.result.split(' ')[1];
 			const userName = result.user.name;
 
 			localStorage.setItem('token', token);
-			setUserCredentials(INITIAL_USER_LOGIN_CREDENTIALS);
-			onLogin(userName);
+			localStorage.setItem('userName', userName);
 			navigate('/courses');
 		} else {
-			setMessage(result.result || result.errors);
+			setErrorMessage(result.result || result.errors);
 		}
 	}
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		loginHandler();
+	};
 
 	return (
-		<div className='login'>
-			<p className='login__errors'>{message}</p>
+		<form className='login' onSubmit={submitHandler}>
+			<p className='login__errors'>{errorMessage}</p>
 			<h2>Login</h2>
 			<Input
 				className='login__input'
@@ -66,13 +70,13 @@ export const Login = (props) => {
 				placeHolderText='Enter password'
 				onChange={onUserPasswordInputHandler}
 			/>
-			<Button text='Login' onClick={loginHandler} />
+			<Button text='Login' type='submit' />
 			<p>
 				If you don't have an account you can{' '}
 				<Link to='/register' className='login__redirect'>
 					Register
 				</Link>
 			</p>
-		</div>
+		</form>
 	);
 };
